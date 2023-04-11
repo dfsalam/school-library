@@ -1,1 +1,1 @@
-# schoool-library
+# school-library
