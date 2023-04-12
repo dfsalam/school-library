@@ -1,6 +1,10 @@
+# frozen_string_literal: true
+
+# Class that represents a person
 class Person
   attr_accessor :name, :age
-  def initialize(age, name = "Unknown",  parent_permission = true)
+
+  def initialize(age, name = 'Unknown', parent_permission: true)
     @id = rand_id
     @name = name
     @age = age
@@ -18,11 +22,9 @@ class Person
   end
 
   def rand_id
-    letters=('A'..'Z').to_a
-    output = letters.sample.concat(Random.rand(1..1000), letters.sample)
-    output
+    letters = ('A'..'Z').to_a
+    letters.sample.concat(Random.rand(1..1000), letters.sample)
   end
-  
 end
 
 person = Person.new(23, 'Richard', false)
@@ -32,4 +34,4 @@ person.age = 55
 person.name = 'Paul'
 puts(person.name)
 puts(person.age)
-puts (person.can_use_services?)
+puts(person.can_use_services?)
