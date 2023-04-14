@@ -1,7 +1,7 @@
 # frozen_string_literal: true
-
+require './nameable.rb'
 # Class that represents a person
-class Person
+class Person < Nameable
   attr_accessor :name, :age
 
   def initialize(age, name = 'Unknown', parent_permission: true)
@@ -15,6 +15,10 @@ class Person
     of_age? || @parent_permission
   end
 
+  def correct_name
+    @name
+  end
+  
   private
 
   def of_age?
