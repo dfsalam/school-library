@@ -2,8 +2,7 @@ require './base_decorator.rb'
 
 #Decorator to capitalize name
 class CapitalizeDecorator < Base
-  def initialize
-    super(nameable)
+  def initialize(nameable)
     @nameable = nameable
   end
 
