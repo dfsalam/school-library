@@ -1,14 +1,15 @@
-require './base_decorator.rb'
+# frozen_string_literal: true
 
-#Decorator to trim name
+require './base_decorator'
+
+# Decorator to trim name
 class TrimmerDecorator < Base
   def initialize(nameable)
+    super(nameable)
     @nameable = nameable
   end
 
   def correct_name
     @nameable.correct_name[0..9]
-    
-  end 
-
+  end
 end

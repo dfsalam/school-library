@@ -1,14 +1,15 @@
-require './base_decorator.rb'
+# frozen_string_literal: true
 
-#Decorator to capitalize name
+require './base_decorator'
+
+# Decorator to capitalize name
 class CapitalizeDecorator < Base
   def initialize(nameable)
+    super(nameable)
     @nameable = nameable
   end
 
   def correct_name
-    out=@nameable.correct_name.capitalize
-    out
-  end 
-
+    @nameable.correct_name.capitalize
+  end
 end

@@ -5,6 +5,7 @@ require './nameable'
 # Base decorator
 class Base < Nameable
   def initialize(nameable)
+    super()
     @nameable = nameable
   end
 
