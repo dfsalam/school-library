@@ -1,5 +1,7 @@
 # frozen_string_literal: true
-require './nameable.rb'
+
+require './nameable'
+require './capitalize_decorator'
 # Class that represents a person
 class Person < Nameable
   attr_accessor :name, :age
@@ -18,7 +20,7 @@ class Person < Nameable
   def correct_name
     @name
   end
-  
+
   private
 
   def of_age?
@@ -31,11 +33,7 @@ class Person < Nameable
   end
 end
 
-person = Person.new(23, 'Richard', false)
-puts(person.name)
-puts(person.age)
-person.age = 55
-person.name = 'Paul'
-puts(person.name)
-puts(person.age)
-puts(person.can_use_services?)
+person = Person.new(22, 'maximilianus')
+person.correct_name
+capitalizedPerson = CapitalizeDecorator.new(person)
+capitalizedPerson.correct_name

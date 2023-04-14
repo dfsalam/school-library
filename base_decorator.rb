@@ -1,10 +1,13 @@
-require './nameable.rb'
+# frozen_string_literal: true
 
-#Base decorator
-class Decorator < Nameable
-  def initialize()
-    @nameable = Nameable.new
+require './nameable'
+
+# Base decorator
+class Base < Nameable
+  def initialize(nameable)
+    @nameable = nameable
   end
+
   def correct_name
     @nameable.correct_name
   end
