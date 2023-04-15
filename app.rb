@@ -83,7 +83,11 @@ class App
         create_rental(@people[person], @books[book], date)
         puts "Rental created successfully"
       when 6
-        puts "You selected option 6 - List all rentals for a given person id"
+        puts "ID of person:"
+        person_id = gets.chomp
+        selected = @rentals.select {|rental| rental.person.id==person_id}
+        puts "Rentals:"
+        selected.each {|rental| puts "Date: #{rental.date}, Book #{rental.book.title} by #{rental.book.author}"}
         
       when 7
         puts "Thank you for using this app!"
