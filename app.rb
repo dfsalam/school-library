@@ -1,6 +1,7 @@
 require './student.rb'
 require './teacher.rb'
 require './rental.rb'
+require './book.rb'
 
 class App
   def initialize
@@ -26,7 +27,7 @@ class App
 
       case option
       when 1
-        list_all_people
+        list_all_books
       when 2
         list_all_people
       when 3
@@ -60,18 +61,22 @@ class App
           create_teacher(age, name, specialization)
         else
           puts "Invalid choice. Please try again."
-        end
-          
+        end         
 
       when 4
-        puts "You selected option 4 - Create a book"
-        # Code for option 4
+        print "Title: "
+        title = gets.chomp
+        print "Author: "
+        author = gets.chomp
+        create_book(title, author)
+        puts "Book created successfully"
+        
       when 5
         puts "You selected option 5 - Create a rental"
-        # Code for option 5
+      
       when 6
         puts "You selected option 6 - List all rentals for a given person id"
-        # Code for option 6
+        
       when 7
         puts "Thank you for using this app!"
         break
@@ -93,11 +98,25 @@ class App
     @people.push(teacher)
     puts "Person created successfully"
   end
+
+  def create_book(title, author)
+    book = Book.new(title, author)
+    @books.push(book)
+  end
+
   def list_all_people
     if @people.empty?
       puts "No people found."
     else
       @people.each { |person| puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+    end
+  end
+
+  def list_all_books
+    if @books.empty?
+      puts "No books found."
+    else
+      @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
     end
   end
 end
