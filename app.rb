@@ -1,5 +1,5 @@
 class App
-  def start
+  def run
     puts <<~MENU
       Welcome to the school library app!
       1 - List all books
@@ -12,6 +12,3 @@ class App
     MENU
   end
 end
-
-app = App.new
-app.start
