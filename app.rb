@@ -72,8 +72,16 @@ class App
         puts "Book created successfully"
         
       when 5
-        puts "You selected option 5 - Create a rental"
-      
+        puts "Select a book from the following list by number"
+        @books.each_with_index { |book, index| puts "#{index}) Title: #{book.title}, Author: #{book.author}" }
+        book = gets.chomp.to_i
+        puts "Select a person from the following list by number (not id)"
+        @people.each_with_index { |person, index| puts "#{index}) [#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+        person = gets.chomp.to_i
+        print "Date: "
+        date = gets.chomp
+        create_rental(@people[person], @books[book], date)
+        puts "Rental created successfully"
       when 6
         puts "You selected option 6 - List all rentals for a given person id"
         
@@ -102,6 +110,11 @@ class App
   def create_book(title, author)
     book = Book.new(title, author)
     @books.push(book)
+  end
+
+  def create_rental(person, book, date)
+    rental = Rental.new(person, book, date)
+    @rentals.push(rental)
   end
 
   def list_all_people
