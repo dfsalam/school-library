@@ -1,9 +1,7 @@
 # frozen_string_literal: true
 
-require './student'
-require './teacher'
-require './rental'
-require './book'
+require './functions'
+require './menu'
 # App class
 class App
   def initialize
@@ -28,9 +26,9 @@ class App
       option = gets.chomp.to_i
       case option
       when 1
-        list_all_books
+        list_all_books(@books)
       when 2
-        list_all_people
+        list_all_people(@people)
       when 3
         print 'Do you want to create a student(1) or a teacher(2)? [Input the number]:'
         person_type = gets.chomp.to_i
@@ -43,9 +41,9 @@ class App
           print 'Has parent permission? [Y/N]: '
           permission = gets.chomp
           if %w[y Y].include?(permission)
-            create_student(age, name, true)
+            create_student(age, name, true, @people)
           elsif %w[n N].include?(permission)
-            create_student(age, name, false)
+            create_student(age, name, false, @people)
           else
             puts 'Invalid choice. Please try again.'
           end
@@ -57,7 +55,7 @@ class App
           print 'Specialization: '
           specialization = gets.chomp
           # Create the teacher
-          create_teacher(age, name, specialization)
+          create_teacher(age, name, specialization, @people)
         else
           puts 'Invalid choice. Please try again.'
         end
@@ -66,7 +64,7 @@ class App
         title = gets.chomp
         print 'Author: '
         author = gets.chomp
-        create_book(title, author)
+        create_book(title, author, @books)
         puts 'Book created successfully'
       when 5
         puts 'Select a book from the following list by number'
@@ -79,59 +77,18 @@ class App
         person = gets.chomp.to_i
         print 'Date: '
         date = gets.chomp
-        create_rental(@people[person], @books[book], date)
+        create_rental(@people[person], @books[book], date, @rentals)
         puts 'Rental created successfully'
       when 6
         puts 'ID of person:'
         person_id = gets.chomp
-        selected = @rentals.select { |rental| rental.person.id == person_id }
-        puts 'Rentals:'
-        selected.each { |rental| puts "Date: #{rental.date}, Book #{rental.book.title} by #{rental.book.author}" }
+        list_rentals_by_id(person_id, @rentals)
       when 7
         puts 'Thank you for using this app!'
         break
       else
         puts 'Invalid choice. Please try again.'
       end
-    end
-  end
-
-  def create_student(age, name, permission)
-    student = Student.new(age, name)
-    student.parent_permission = permission
-    @people.push(student)
-    puts 'Person created successfully'
-  end
-
-  def create_teacher(age, name, specialization)
-    teacher = Teacher.new(age, name, specialization)
-    @people.push(teacher)
-    puts 'Person created successfully'
-  end
-
-  def create_book(title, author)
-    book = Book.new(title, author)
-    @books.push(book)
-  end
-
-  def create_rental(person, book, date)
-    rental = Rental.new(person, book, date)
-    @rentals.push(rental)
-  end
-
-  def list_all_people
-    if @people.empty?
-      puts 'No people found.'
-    else
-      @people.each { |person| puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
-    end
-  end
-
-  def list_all_books
-    if @books.empty?
-      puts 'No books found.'
-    else
-      @books.each { |book| puts "Title: #{book.title}, Author: #{book.author}" }
     end
   end
 end
