@@ -4,8 +4,8 @@ require './person'
 
 # Class that represents a teacher
 class Teacher < Person
-  def initialize(age, specialization, name)
-    super(age, name, true)
+  def initialize(age, name, specialization)
+    super(age, name)
     @specialization = specialization
   end
 
