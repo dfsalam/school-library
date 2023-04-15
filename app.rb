@@ -43,8 +43,7 @@ class App
           if permission == "y" || permission == "Y"            
             #Create the student
             create_student(age, name, true)
-          elsif permission == "n" || permission == "N"
-            parent_permission = false
+          elsif permission == "n" || permission == "N"            
             #Create the student
             create_student(age, name, false)
           else
@@ -85,6 +84,7 @@ class App
 
   def create_student(age, name, permission)
     student = Student.new(age, name)
+    student.parent_permission = permission
     @people.push(student)
     puts "Person created successfully"
   end
