@@ -26,35 +26,39 @@ class App
 
       case option
       when 1
-        puts "You selected option 1 - List all books"
-        # Code for option 1
+        list_all_people
       when 2
-        puts "You selected option 2 - List all people"
-        # Code for option 2
+        list_all_people
       when 3
         print "Do you want to create a student(1) or a teacher(2)? [Input the number]:"
         person_type = gets.chomp.to_i
         case person_type
         when 1
-          print "Age:"
+          print "Age: "
           age = gets.chomp.to_i
-          print "Name:"
-          name = gets.chomp.to_i
-          print "Has parent permission? [Y/N]:"
+          print "Name: "
+          name = gets.chomp
+          print "Has parent permission? [Y/N]: "
           permission = gets.chomp
-          if permission == "y" || permission == "Y"
-            parent_permission = true
-            create_student(age, name, parent_permission)
+          if permission == "y" || permission == "Y"            
+            #Create the student
+            create_student(age, name, true)
           elsif permission == "n" || permission == "N"
             parent_permission = false
-            create_student(age, name, parent_permission)
+            #Create the student
+            create_student(age, name, false)
           else
             puts "Invalid choice. Please try again."            
-          end
-          #Create the student
-          
+          end         
         when 2
-          puts "I haven't created the teacher yet."          
+          print "Age: "
+          age = gets.chomp.to_i
+          print "Name: "
+          name = gets.chomp
+          print "Specialization: "
+          specialization = gets.chomp
+          #Create the teacher
+          create_teacher(age, name, specialization)
         else
           puts "Invalid choice. Please try again."
         end
@@ -79,8 +83,8 @@ class App
   end
   #Run method end here
 
-  def create_student(age, name, parent_permission)
-    student = Student.new(age, name, parent_permission)
+  def create_student(age, name, permission)
+    student = Student.new(age, name)
     @people.push(student)
     puts "Person created successfully"
   end
@@ -88,5 +92,12 @@ class App
     teacher = Teacher.new(age, name, specialization)
     @people.push(teacher)
     puts "Person created successfully"
+  end
+  def list_all_people
+    if @people.empty?
+      puts "No people found."
+    else
+      @people.each { |person| puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+    end
   end
 end
