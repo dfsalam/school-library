@@ -6,6 +6,7 @@ require './trimmer_decorator'
 # Class that represents a person
 class Person < Nameable
   attr_accessor :name, :age
+  attr_reader :rentals
 
   def initialize(age, name = 'Unknown', parent_permission: true)
     super()
@@ -13,6 +14,11 @@ class Person < Nameable
     @name = name
     @age = age
     @parent_permission = parent_permission
+    @rentals = []
+  end
+
+  def add_rental(rental)
+    @rentals.push(rental)
   end
 
   def can_use_services?

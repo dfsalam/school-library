@@ -5,9 +5,18 @@ require './person'
 
 # Class that represents a student
 class Student < Person
+  attr_reader :classroom
+
   def initialize(age, classroom, name)
     super(age, name, true)
     @classroom = classroom
+  end
+
+  def classroom=(classroom)
+    @classroom&.students&.delete(self)
+
+    @classroom = classroom
+    classroom&.add_student(self)
   end
 
   def play_hooky
