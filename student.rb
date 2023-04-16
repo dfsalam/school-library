@@ -7,8 +7,8 @@ require './person'
 class Student < Person
   attr_reader :classroom
 
-  def initialize(age, classroom, name)
-    super(age, name, true)
+  def initialize(age, name)
+    super(age, name)
     @classroom = classroom
   end
 
@@ -23,7 +23,3 @@ class Student < Person
     '¯(ツ)/¯'
   end
 end
-
-student1 = Student.new(23, 'Static')
-puts(student1.play_hooky)
-puts(student1.age)
