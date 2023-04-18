@@ -5,33 +5,35 @@ require './menu'
 # App class
 class App
   def initialize
-    @books = []
-    @people = []
-    @rentals = []
+    f = Functions.new
+    m = Menu.new
+    @books = f.books
+    @people = f.people
+    @rentals = f.rentals
   end
 
-  def run
+  def run    
     puts 'Welcome to the school library app!'
     loop do
-      option = inicial_menu
+      option = m.inicial_menu
       if option == 7
         puts 'Thank you for using this app!'
         break
       end
-      swith_case(option)
+      switch_case(option)
     end
   end
-end
 
-def swith_case(option)
-  case option
-  when 1 then list_all_books(@books)
-  when 2 then list_all_people(@people)
-  when 3 then option3
-  when 4 then option4
-  when 5 then option5
-  when 6 then option6
-  else
-    puts 'Invalid choice. Please try again.'
+  def switch_case(option)    
+    case option
+    when 1 then f.list_all_books(@books)
+    when 2 then f.list_all_people(@people)
+    when 3 then m.option3
+    when 4 then m.option4
+    when 5 then m.option5
+    when 6 then m.option6
+    else
+      puts 'Invalid choice. Please try again.'
+    end
   end
 end
