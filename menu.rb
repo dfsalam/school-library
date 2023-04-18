@@ -2,9 +2,15 @@
 
 require './functions'
 
+# This class represents the menu
 class Menu
+  attr_accessor :people, :books, :rentals
+
   def initialize
     @f = Functions.new
+    @books = @f.books
+    @people = @f.people
+    @rentals = @f.rentals
   end
 
   def inicial_menu
@@ -15,14 +21,20 @@ class Menu
     gets.chomp.to_i
   end
 
+  def option1(books)
+    @f.list_all_books(books)
+  end
+
+  def option2(people)
+    @f.list_all_people(people)
+  end
+
   def option3
     print 'Do you want to create a student(1) or a teacher(2)? [Input the number]:'
     person_type = gets.chomp.to_i
     case person_type
-    when 1
-      option31
-    when 2
-      option32
+    when 1 then option31
+    when 2 then option32
     else
       puts 'Invalid choice. Please try again.'
     end
@@ -82,7 +94,7 @@ class Menu
   def ask_date(person, book)
     print 'Date: '
     date = gets.chomp
-    @f.create_rental(@people[person], @books[book], date, @rentals)
+    @f.create_rental(@people[person], @books[book], date)
     puts 'Rental created successfully'
   end
 

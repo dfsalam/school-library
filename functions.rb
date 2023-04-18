@@ -4,6 +4,8 @@ require './student'
 require './teacher'
 require './rental'
 require './book'
+
+# This class represents functions inside menu
 class Functions
   attr_accessor :people, :books, :rentals
 
