@@ -19,7 +19,7 @@ class App
         puts 'Thank you for using this app!'
         break
       end
-      self.switch_case(option)
+      switch_case(option)
     end
   end
 
