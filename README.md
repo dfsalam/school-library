@@ -59,11 +59,17 @@ In order to run this project you need to install Ruby.
 
 ## 👥 Authors <a name="authors"></a>
 
-👤 Diego Salamanca
+👤 **Diego Salamanca**
 
 - GitHub: [@dfsalam](https://github.com/dfsalam)
 
 - LinkedIn: [@dfsalam](https://www.linkedin.com/in/dfsalamdev/)
+
+👤 **Uthman Igein Bello-Imoukhuede**
+
+- GitHub: [Uthmanbello](https://github.com/Uthmanbello)
+- Twitter: [@UthmanDeRoyale](https://twitter.com/UthmanDeRoyale)
+- LinkedIn: [Uthman Igein Bello-Imoukhuede](linkedin.com/in/uthmanbelloimoukhuede)
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
 
@@ -88,6 +94,6 @@ If you like this project give it one star
 
 ## 📝 License <a name="license"></a>
 
-This project is [MIT](./LICENSE) licensed.
+This project is [MIT](https://github.com/dfsalam/school-library/blob/dev/LICENSE) licensed.
 
 <p align="right">(<a href="#readme-top">back to top</a>)</p>
