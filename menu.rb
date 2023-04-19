@@ -105,6 +105,7 @@ class Menu
   end
 
   def option7
+    @f.save_data    
     puts 'Thank you for using this app!'
   end
 end

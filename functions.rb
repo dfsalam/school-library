@@ -59,4 +59,29 @@ class Functions
     puts 'Rentals:'
     selected.each { |rental| puts "Date: #{rental.date}, Book #{rental.book.title} by #{rental.book.author}" }
   end
+
+  def load_data
+    people_json = 'people.json'
+    #books_json = 'books.json'
+    #rentals_json = 'rentals.json'
+    if File.exist?(people_json)
+      people_data = JSON.parse(File.read(people_json))
+
+
+      #create objects
+      app.people = people_data
+    end
+  end
+
+  def save_data
+    #construct a json
+    people_json = []
+    temp = {}
+    @people.each {
+      |person|
+        temp={Type: person.class.name, Name:person.name, ID:person.id, Age:person.age}
+        people_json.push(temp)     
+    }   
+    File.write('people.json', JSON.generate(people_json))    
+  end
 end

@@ -16,7 +16,7 @@ class App
     loop do
       option = @m.inicial_menu
       if option == 7
-        puts 'Thank you for using this app!'
+        @m.option7     
         break
       end
       switch_case(option)
@@ -30,7 +30,7 @@ class App
     when 3 then @m.option3
     when 4 then @m.option4
     when 5 then @m.option5
-    when 6 then @m.option6
+    when 6 then @m.option6    
     else
       puts 'Invalid choice. Please try again.'
     end
