@@ -8,12 +8,14 @@ class Menu
 
   def initialize
     @f = Functions.new
+    @f.load_data
     @books = @f.books
     @people = @f.people
     @rentals = @f.rentals
   end
 
   def inicial_menu
+    
     puts ['', 'Please choose an option by entering a number:']
     puts ['1 - List all books', '2 - List all people', '3 - Create a person']
     puts ['4 - Create a book', '5 - Create a rental', '6 - List all rental for a given person id']
@@ -105,7 +107,7 @@ class Menu
   end
 
   def option7
-    @f.save_data    
+    @f.save_data
     puts 'Thank you for using this app!'
   end
 end

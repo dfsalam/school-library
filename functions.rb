@@ -15,16 +15,18 @@ class Functions
     @rentals = []
   end
 
-  def create_student(age, name, permission)
+  def create_student(age, name, permission, id = 'empty')
     student = Student.new(age, name)
     student.parent_permission = permission
     @people.push(student)
+    student.id = id if id != 'empty'
     puts 'Person created successfully'
   end
 
-  def create_teacher(age, name, specialization)
+  def create_teacher(age, name, specialization, id = 'empty')
     teacher = Teacher.new(age, name, specialization)
     @people.push(teacher)
+    teacher.id = id if id != 'empty'
     puts 'Person created successfully'
   end
 
@@ -42,7 +44,7 @@ class Functions
     if array.empty?
       puts 'No people found.'
     else
-      array.each { |person| puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" }
+      array.each { |person| puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" if person!=nil}
     end
   end
 
@@ -62,26 +64,38 @@ class Functions
 
   def load_data
     people_json = 'people.json'
-    #books_json = 'books.json'
-    #rentals_json = 'rentals.json'
-    if File.exist?(people_json)
-      people_data = JSON.parse(File.read(people_json))
+    # books_json = 'books.json'
+    # rentals_json = 'rentals.json'
+    return unless File.exist?(people_json)
 
+    people_data = JSON.parse(File.read(people_json))
+    people_data.each do |person|
+      load_person(person)
+    end
+  end
 
-      #create objects
-      app.people = people_data
+  def load_person(person)
+    if person['Type'] == 'Student'
+      student = create_student(person['Age'], person['Name'], person['Permission'], person['ID'])
+      @people.push(student)
+    elsif person['Type'] == 'Teacher'
+      teacher = create_teacher(person['Age'], person['Name'], person['Specialization'], person['ID'])
+      @people.push(teacher)
     end
   end
 
   def save_data
-    #construct a json
+    # construct a json
     people_json = []
     temp = {}
-    @people.each {
-      |person|
-        temp={Type: person.class.name, Name:person.name, ID:person.id, Age:person.age}
-        people_json.push(temp)     
-    }   
-    File.write('people.json', JSON.generate(people_json))    
+    @people.each do |person|
+      if person != nil
+        temp = { Type: person.class.name, Name: person.name, ID: person.id, Age: person.age,
+                Permission: person.parent_permission }
+        temp[:Specialization] = person.specialization if person.instance_of?(::Teacher)
+        people_json.push(temp)
+      end
+    end
+    File.write('people.json', JSON.generate(people_json))
   end
 end

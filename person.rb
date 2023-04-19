@@ -5,8 +5,8 @@ require './capitalize_decorator'
 require './trimmer_decorator'
 # Class that represents a person
 class Person < Nameable
-  attr_accessor :name, :age, :parent_permission
-  attr_reader :rentals, :id
+  attr_accessor :name, :age, :parent_permission, :id
+  attr_reader :rentals
 
   def initialize(age, name, parent_permission: true)
     super()
