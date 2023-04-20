@@ -44,7 +44,9 @@ class Functions
     if array.empty?
       puts 'No people found.'
     else
-      array.each { |person| puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" if person!=nil}
+      array.each do |person|
+        puts "[#{person.class.name}] Name: #{person.name}, ID: #{person.id}, Age: #{person.age}" unless person.nil?
+      end
     end
   end
 
@@ -89,12 +91,12 @@ class Functions
     people_json = []
     temp = {}
     @people.each do |person|
-      if person != nil
-        temp = { Type: person.class.name, Name: person.name, ID: person.id, Age: person.age,
-                Permission: person.parent_permission }
-        temp[:Specialization] = person.specialization if person.instance_of?(::Teacher)
-        people_json.push(temp)
-      end
+      next if person.nil?
+
+      temp = { Type: person.class.name, Name: person.name, ID: person.id, Age: person.age,
+               Permission: person.parent_permission }
+      temp[:Specialization] = person.specialization if person.instance_of?(::Teacher)
+      people_json.push(temp)
     end
     File.write('people.json', JSON.generate(people_json))
   end

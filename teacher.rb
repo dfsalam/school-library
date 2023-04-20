@@ -5,6 +5,7 @@ require './person'
 # Class that represents a teacher
 class Teacher < Person
   attr_reader :specialization
+
   def initialize(age, name, specialization)
     super(age, name)
     @specialization = specialization
